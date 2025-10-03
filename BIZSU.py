@@ -29,7 +29,8 @@ for url in url_list:
         full_text = (title + " " + body_text).strip()
 
         # csak az első 200 karakter
-        url_texts.append(full_text[:200])
+        # url_texts.append(full_text[:12000])
+        url_texts.append(soup)
 
     except Exception as e:
         url_texts.append(f"Hiba: {e}")
