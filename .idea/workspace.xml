@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6862f1b-6411-47c1-8ad7-7dcf9e6c85ef" name="Changes" comment="fgfg" />
+    <list default="true" id="b6862f1b-6411-47c1-8ad7-7dcf9e6c85ef" name="Changes" comment="fgfg">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BIZSU.py" beforeDir="false" afterPath="$PROJECT_DIR$/BIZSU.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/URL_LIST.csv" beforeDir="false" afterPath="$PROJECT_DIR$/URL_LIST.csv" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,7 +50,8 @@
     "Python.BIZSU.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main"
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/node-agar-ai-full-enhanced"
   }
 }]]></component>
   <component name="SharedIndexes">
@@ -89,7 +94,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759483646311</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="fgfg">
+      <option name="closed" value="true" />
+      <created>1759484215600</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1759484215600</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
