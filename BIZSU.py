@@ -1,6 +1,6 @@
 import csv
 import requests
-from bs4 import BeautifulSoup
+#from bs4 import BeautifulSoup
 import os
 import html
 import json
@@ -17,11 +17,11 @@ payload = {"searchString": "302540"}
 
 
 #response = requests.post(url, json=payload)
-response = requests.post(url)
+#response = requests.post(url)
 
 
-print("Státusz kód:", response.status_code)
-print("Válasz:", response.text)
+#print("Státusz kód:", response.status_code)
+#print("Válasz:", response.text)
 #system.exit()
 
 # fájlnevek
@@ -47,15 +47,39 @@ for url in url_list:
         print(f"Feldolgozás alatt: {url}")
 
         resp = requests.get(url, timeout=5)
+        print(type(resp.content))
+        print(type(resp.text))
+        print(type(resp))
+        print(dir(resp))
+        print(resp.cookies)
+        print(resp.encoding)
+        print(resp.history)
+        print(resp.is_redirect)
+        print(resp.iter_content)
+        print(resp.raw)
+        print(resp.iter_lines)
+        print(resp.request)
+        print(resp.headers)
+
+        product_search = str(resp.content[1000:2000])
+        #print(product_search)
+        #print(type(product_search))
+
+        start_index = product_search.find("product_search") + len(search_string)
+        extracted_content = product_search.find[start_index:start_index + 1000]
+
+        #st = search_content.find('e',0) #  product_search_results_container")
+       # print(st)
+        print(extracted_content)
         #content = resp.content.replace('e9', 'é')
-        resp.encoding = resp.apparent_encoding  # helyes kódolás felismerése
+        #resp.encoding = resp.apparent_encoding  # helyes kódolás felismerése
         #print(resp.content.decode('utf-8'))
         #content = resp.content.decode('utf-8', errors='ignore')
         #content = decode(resp.content)
         #print(content)
         # HTML elemzés
 
-        soup = BeautifulSoup(resp.text, "html.parser")
+        #soup = BeautifulSoup(resp.text, "html.parser")
 
 
         # oldal szöveg (title + body)
@@ -65,10 +89,12 @@ for url in url_list:
 
         # csak az első 200 karakter
         # url_texts.append(full_text[:12000])
-        search_results = soup.find(id="product_search_results_container")
-        search_content = str(search_results)
+
+        #search_results = soup.find(id="product_search_results_container")
+        #search_content = str(search_results)
         #print(search_content)
         # speciális karakterek javítása
+        search_content = resp.content[st:st+1000]
         content = (search_content.replace('\\u00c1', 'Á').
                    replace('\\u0151', 'ö').
                    replace('\\u00fc', 'ü').
