@@ -8,11 +8,11 @@ import re
 import time
 
 
-url = "https://zsu.hu/header-search/api/start-product-name-search"
-payload = {"searchString": "302540"}
+#url = "https://zsu.hu/header-search/api/start-product-name-search"
+#payload = {"searchString": "302540"}
 
-url = "https://zsu.hu/header-search/api/getHeaderSearches"
-payload = {"searchString": "302540"}
+#url = "https://zsu.hu/header-search/api/getHeaderSearches"
+#payload = {"searchString": "302540"}
 
 
 
@@ -46,27 +46,58 @@ for url in url_list:
         i=i+1
         print(f"Feldolgozás alatt: {url}")
 
-        resp = requests.get(url, timeout=5)
-        print(type(resp.content))
-        print(type(resp.text))
-        print(type(resp))
-        print(dir(resp))
-        print(resp.cookies)
-        print(resp.encoding)
-        print(resp.history)
-        print(resp.is_redirect)
-        print(resp.iter_content)
-        print(resp.raw)
-        print(resp.iter_lines)
-        print(resp.request)
-        print(resp.headers)
 
-        product_search = str(resp.content[1000:2000])
+        #def myfunc(a):
+        #    return len(a)
+        #x = map(myfunc, ('apple', 'banana', 'cherry'))
+        #print(x)
+        #print(type(x))
+        # convert the map into a list, for readability:
+        #print(list(x))
+
+        resp = requests.get(url, timeout=5)
+        #print(type(resp))
+        #print(type(resp.text))
+        #print(type(resp))
+        #print(dir(resp))
+        print(resp.elapsed)
+        #print(resp.headers)
+
+        #print(dir(resp.cookies))
+
+        #print(map(resp))
+        #print("resp.cookies.get_dict")
+        #print(resp.cookies.get_dict)
+        #print(resp.cookies.items)
+        #print(resp.cookies.values)
+
+        #print(resp.is_redirect)
+
+        #print(resp._content)
+        #print(resp.json)
+        #print(resp.links)
+
+        #print(resp.next)
+
+        #print(resp.__sizeof__())
+        #print(resp.__static_attributes__)
+        #print(resp.__str__)
+        #print(resp.headers['Content-Length'])
+
+        #product_search = str(resp.text[1000:2000])
         #print(product_search)
         #print(type(product_search))
+        #print(resp.text[154416:3000])
 
-        start_index = product_search.find("product_search") + len(search_string)
-        extracted_content = product_search.find[start_index:start_index + 1000]
+        start_index0 = resp.text.find("productnumbers=")
+        start_index1 = resp.text.find("filtersconfig=")
+        #start_index = resp.text.find("headerContent")
+        start_product_list = resp.text.find("product-list-gate")+18
+        end_product_list = resp.text.find("> </product-list-gate")
+        #print(start_index)
+        procuct_list_content = resp.text[start_product_list:end_product_list]
+
+        extracted_content = resp.text[start_product_list:end_product_list]
 
         #st = search_content.find('e',0) #  product_search_results_container")
        # print(st)
@@ -94,8 +125,9 @@ for url in url_list:
         #search_content = str(search_results)
         #print(search_content)
         # speciális karakterek javítása
-        search_content = resp.content[st:st+1000]
-        content = (search_content.replace('\\u00c1', 'Á').
+        #st=1000
+        #search_content = resp.text[st:st+1000]
+        content = (extracted_content.replace('\\u00c1', 'Á').
                    replace('\\u0151', 'ö').
                    replace('\\u00fc', 'ü').
                    replace('\\u00e9', 'é').
@@ -114,7 +146,7 @@ for url in url_list:
         replace("&gt;", ">"))  # .replace("&gt;", ">").replace("&amp;", "&")
         print(content)
         # A fix kulcsok listája
-        keys = ['productNumber', "CikkKod", 'Keszlet', 'Gyarto', 'KiskerAr', 'TCD_ID', 'ArDatum', 'RefeKeszlet', 'AlapEgys', 'Suly', 'Kep1','CnevText','TCD_ARTNR','TCD_DLNR','TCD_GYARTO','TCD_ARTNR_SAJAT','TCD_DLNR_SAJAT','gyarto','tcd_gyarto','br_price','customStockOrder','netFullPrice','br_full_price','discountPercent'
+        keys = ['productNumber', "CikkKod", 'stock_html', 'tcd_artnr_seo', 'tcd_gyarto_seo','seo', 'Keszlet', 'Gyarto', 'KiskerAr', 'TCD_ID', 'ArDatum', 'RefeKeszlet', 'AlapEgys', 'Suly', 'Kep1','CnevText','TCD_ARTNR','TCD_DLNR','TCD_GYARTO','TCD_ARTNR_SAJAT','TCD_DLNR_SAJAT','gyarto','tcd_gyarto','br_price','customStockOrder','netFullPrice','br_full_price','discountPercent'
                 ,'ADV_TCD_ARTNR','CUSTOM_TCD_ARTNR','alternative_products','askForInformation','cikkkod','productImages','firstImageExt'] #,'upmValue','tcd_artnr_seo','tcd_gyarto_seo','seo','stock_html']
 #'CnevText','TCD_ARTNR','TCD_DLNR','TCD_GYARTO','TCD_ARTNR_SAJAT','TCD_DLNR_SAJAT','gyarto','tcd_gyarto','br_price','customStockOrder','netFullPrice','br_full_price','discountPercent','tcd_artnr_seo':'30337_01','tcd_gyarto_seo':'lemf_rder','seo':'lem_3033701_br','stock_html':'&<div class=\'left\'> &<div class=\'display-flex margin-x-auto mb-5\'> &<img src=\'\/themes\/frontend\/images\/stock.png\' width=\'22\' height=\'22\'> &<i>Készlet&<\/i> &<div class=\'info-box-btn\'> &<img src=\'\/themes\/frontend\/images\/svg\/info.svg\' width=\'18\' height=\'18\'>         &<span>Munkanapokon megrendeléstöl számított 3-5 órán belül a kiválasztott üzletben átvehetö.&<\/span>  &<\/div> &<\/div> &<b class=\'display-flex flex-column flex-column-mobile\'> &<span class=\'display-flex margin-x-auto text-center\'>  &<span class=\'display-flex\'> &<img src=\'\/themes\/frontend\/images\/stock-narancs.svg\' class=\'ok beszallito\' width=\'20px\'> &<span class=\'stock-info\'>3-5 órán belül&<\/span>  &<\/span>  &<\/span> &<\/b> &<\/div> &<div class=\'right\'> &<div class=\'display-flex margin-x-auto mb-5\'> &<img src=\'\/themes\/frontend\/images\/svg\/shipping.svg\' width=\'24\' height=\'24\'> &<i>Szállítás&<\/i> &<div class=\'info-box-btn\'> &<img src=\'\/themes\/frontend\/images\/svg\/info.svg\' width=\'18\' height=\'18\'>  &<span>A termék beérkezésétöl számított 1-2 munkanapon belül átadjuk a rendelést a futárszolgálatnak.&<\/span>  &<\/div> &<\/div> &<b class=\'display-flex flex-column flex-column-mobile\'> &<span class=\'display-flex margin-x-auto text-center\'> &<img src=\'\/themes\/frontend\/images\/stock-narancs.svg\' class=\'ok beszallito\' width=\'20px\'>  &<span class=\'stock-info\'>&<p class='text-left'>1-2 munkanap&<\/p>&<\/span>  &<\/span> &<\/b> &<\/div>'}]],'from':1,'last_page':1,'next_page_url':null,'path':'https:\/\/zsu.hu\/cikkszamkereso','per_page':10,'prev_page_url':null,'to':1,'total':1}" searchquery="LEM_3033701" searchtype="10" type="1"> </product-list-gate> </div>
 #{'productNumber': None, 'CikkKod': 'LEM 3033701 *BR', 'Keszlet': 'B', 'Gyarto': 'LEMFÖRDER', 'KiskerAr': '17770.6386', 'TCD_ID': '35', 'ArDatum': '2025-09-18 21:52:46', 'RefeKeszlet': 'I', 'AlapEgys': '1', 'Suly': '0',
