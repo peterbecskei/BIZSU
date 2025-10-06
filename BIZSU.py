@@ -142,8 +142,9 @@ for url in url_list:
         content = (content.replace('&quot;', "'").
         replace("\\u0150", "✅").
         replace("\\u00d6", "Ö").
-        replace("lt;", "<").
-        replace("&gt;", ">"))  # .replace("&gt;", ">").replace("&amp;", "&")
+                   replace("\\u00c9", "É") )
+        #replace("lt;", "<").
+        #replace("&gt;", ">"))  # .replace("&gt;", ">").replace("&amp;", "&")
         print(content)
         # A fix kulcsok listája
         keys = ['productNumber', "CikkKod", 'stock_html', 'tcd_artnr_seo', 'tcd_gyarto_seo','seo', 'Keszlet', 'Gyarto', 'KiskerAr', 'TCD_ID', 'ArDatum', 'RefeKeszlet', 'AlapEgys', 'Suly', 'Kep1','CnevText','TCD_ARTNR','TCD_DLNR','TCD_GYARTO','TCD_ARTNR_SAJAT','TCD_DLNR_SAJAT','gyarto','tcd_gyarto','br_price','customStockOrder','netFullPrice','br_full_price','discountPercent'
