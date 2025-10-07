@@ -101,7 +101,7 @@ for url in url_list:
 
         #st = search_content.find('e',0) #  product_search_results_container")
        # print(st)
-        print(extracted_content)
+        #print(extracted_content)
         #content = resp.content.replace('e9', 'é')
         #resp.encoding = resp.apparent_encoding  # helyes kódolás felismerése
         #print(resp.content.decode('utf-8'))
