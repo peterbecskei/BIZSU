@@ -6,6 +6,7 @@ import html
 import json
 import re
 import time
+from datetime import datetime
 
 
 #url = "https://zsu.hu/header-search/api/start-product-name-search"
@@ -40,7 +41,7 @@ with open(INPUT_FILE, "r", encoding="utf-8") as f:
 url_texts = []
 url_extracted = []
 i=0
-#timestamp = time.time()
+timestamp = time.time()
 for url in url_list:
     try:
         i=i+1
@@ -60,7 +61,8 @@ for url in url_list:
         #print(type(resp.text))
         #print(type(resp))
         #print(dir(resp))
-        print(resp.elapsed)
+        dt= (time.time() - timestamp)
+        print(i , len(url_list) , round(dt),  resp.elapsed)
         #print(resp.headers)
 
         #print(dir(resp.cookies))
@@ -145,10 +147,17 @@ for url in url_list:
                    replace("\\u00c9", "É") )
         #replace("lt;", "<").
         #replace("&gt;", ">"))  # .replace("&gt;", ">").replace("&amp;", "&")
-        print(content)
+        #print(content)
         # A fix kulcsok listája
-        keys = ['productNumber', "CikkKod", 'stock_html', 'tcd_artnr_seo', 'tcd_gyarto_seo','seo', 'Keszlet', 'Gyarto', 'KiskerAr', 'TCD_ID', 'ArDatum', 'RefeKeszlet', 'AlapEgys', 'Suly', 'Kep1','CnevText','TCD_ARTNR','TCD_DLNR','TCD_GYARTO','TCD_ARTNR_SAJAT','TCD_DLNR_SAJAT','gyarto','tcd_gyarto','br_price','customStockOrder','netFullPrice','br_full_price','discountPercent'
-                ,'ADV_TCD_ARTNR','CUSTOM_TCD_ARTNR','alternative_products','askForInformation','cikkkod','productImages','firstImageExt'] #,'upmValue','tcd_artnr_seo','tcd_gyarto_seo','seo','stock_html']
+        keys = ['productNumber', "CikkKod", 'stock_html', 'tcd_artnr_seo', 'tcd_gyarto_seo', 'seo', 'Keszlet', 'Gyarto',
+                'KiskerAr', 'TCD_ID', 'ArDatum', 'RefeKeszlet', 'AlapEgys', 'Suly', 'Kep1', 'CnevText', 'TCD_ARTNR',
+                'TCD_DLNR', 'TCD_GYARTO', 'TCD_ARTNR_SAJAT', 'TCD_DLNR_SAJAT', 'gyarto', 'tcd_gyarto', 'br_price',
+                'customStockOrder', 'netFullPrice', 'br_full_price', 'discountPercent'
+             , 'ADV_TCD_ARTNR', 'CUSTOM_TCD_ARTNR', 'alternative_products', 'askForInformation',
+                'productImages', 'firstImageExt']
+        #keys = ['productNumber']
+        #keys = ['productNumber', "CikkKod", 'stock_html', 'tcd_artnr_seo', 'tcd_gyarto_seo','seo', 'Keszlet', 'Gyarto', 'KiskerAr', 'TCD_ID', 'ArDatum', 'RefeKeszlet', 'AlapEgys', 'Suly', 'Kep1','CnevText','TCD_ARTNR','TCD_DLNR','TCD_GYARTO','TCD_ARTNR_SAJAT','TCD_DLNR_SAJAT','gyarto','tcd_gyarto','br_price','customStockOrder','netFullPrice','br_full_price','discountPercent'
+         #       ,'ADV_TCD_ARTNR','CUSTOM_TCD_ARTNR','alternative_products','askForInformation','cikkkod','productImages','firstImageExt'] #,'upmValue','tcd_artnr_seo','tcd_gyarto_seo','seo','stock_html']
 #'CnevText','TCD_ARTNR','TCD_DLNR','TCD_GYARTO','TCD_ARTNR_SAJAT','TCD_DLNR_SAJAT','gyarto','tcd_gyarto','br_price','customStockOrder','netFullPrice','br_full_price','discountPercent','tcd_artnr_seo':'30337_01','tcd_gyarto_seo':'lemf_rder','seo':'lem_3033701_br','stock_html':'&<div class=\'left\'> &<div class=\'display-flex margin-x-auto mb-5\'> &<img src=\'\/themes\/frontend\/images\/stock.png\' width=\'22\' height=\'22\'> &<i>Készlet&<\/i> &<div class=\'info-box-btn\'> &<img src=\'\/themes\/frontend\/images\/svg\/info.svg\' width=\'18\' height=\'18\'>         &<span>Munkanapokon megrendeléstöl számított 3-5 órán belül a kiválasztott üzletben átvehetö.&<\/span>  &<\/div> &<\/div> &<b class=\'display-flex flex-column flex-column-mobile\'> &<span class=\'display-flex margin-x-auto text-center\'>  &<span class=\'display-flex\'> &<img src=\'\/themes\/frontend\/images\/stock-narancs.svg\' class=\'ok beszallito\' width=\'20px\'> &<span class=\'stock-info\'>3-5 órán belül&<\/span>  &<\/span>  &<\/span> &<\/b> &<\/div> &<div class=\'right\'> &<div class=\'display-flex margin-x-auto mb-5\'> &<img src=\'\/themes\/frontend\/images\/svg\/shipping.svg\' width=\'24\' height=\'24\'> &<i>Szállítás&<\/i> &<div class=\'info-box-btn\'> &<img src=\'\/themes\/frontend\/images\/svg\/info.svg\' width=\'18\' height=\'18\'>  &<span>A termék beérkezésétöl számított 1-2 munkanapon belül átadjuk a rendelést a futárszolgálatnak.&<\/span>  &<\/div> &<\/div> &<b class=\'display-flex flex-column flex-column-mobile\'> &<span class=\'display-flex margin-x-auto text-center\'> &<img src=\'\/themes\/frontend\/images\/stock-narancs.svg\' class=\'ok beszallito\' width=\'20px\'>  &<span class=\'stock-info\'>&<p class='text-left'>1-2 munkanap&<\/p>&<\/span>  &<\/span> &<\/b> &<\/div>'}]],'from':1,'last_page':1,'next_page_url':null,'path':'https:\/\/zsu.hu\/cikkszamkereso','per_page':10,'prev_page_url':null,'to':1,'total':1}" searchquery="LEM_3033701" searchtype="10" type="1"> </product-list-gate> </div>
 #{'productNumber': None, 'CikkKod': 'LEM 3033701 *BR', 'Keszlet': 'B', 'Gyarto': 'LEMFÖRDER', 'KiskerAr': '17770.6386', 'TCD_ID': '35', 'ArDatum': '2025-09-18 21:52:46', 'RefeKeszlet': 'I', 'AlapEgys': '1', 'Suly': '0',
         extracted = {}
@@ -167,7 +176,8 @@ for url in url_list:
 
 
         #print(i,dt, url, extracted)
-        print( extracted)
+        #print( extracted['productNumber'], extracted['CikkKod'], extracted['Keszlet'], extracted['Gyarto'], extracted['KiskerAr'], extracted['TCD_ID'], extracted['ArDatum'], extracted['RefeKeszlet'], extracted['AlapEgys'], extracted['Suly']  )
+        print(extracted['productNumber'] ,extracted['CikkKod'], extracted['Keszlet'], extracted['br_price'],extracted['Gyarto'], extracted['KiskerAr'])
         url_extracted.append(extracted)
         url_texts.append(content)
         #print(search_results)
