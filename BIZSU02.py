@@ -6,24 +6,25 @@ import html
 import json
 import re
 import time
+
 from datetime import datetime
 
 
-#url = "https://zsu.hu/header-search/api/start-product-name-search"
-#payload = {"searchString": "302540"}
-
+url = "https://zsu.hu/header-search/api/start-product-name-search"
+payload = {"searchString": "302540"}
+p1= stringify(payload)
 #url = "https://zsu.hu/header-search/api/getHeaderSearches"
 #payload = {"searchString": "302540"}
 
 
 
-#response = requests.post(url, json=payload)
+response = requests.post(url, params=p1)
 #response = requests.post(url)
 
 
-#print("Státusz kód:", response.status_code)
-#print("Válasz:", response.text)
-#system.exit()
+print("Státusz kód:", response.status_code)
+print("Válasz:", response.text)
+system.exit()
 
 # fájlnevek
 INPUT_FILE = "URL_LIST.csv"
