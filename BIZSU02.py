@@ -6,25 +6,40 @@ import html
 import json
 import re
 import time
-
+import sys
 from datetime import datetime
 
 
-url = "https://zsu.hu/header-search/api/start-product-name-search"
-payload = {"searchString": "302540"}
-p1= stringify(payload)
+# "/header-search/api/start-product-number-search" === e.config.url & & (t.prNumberSearchLoader = !1),
+#"/header-search/api/start-oe-number-search" == = e.config.url & & (t.oeNumberSearchLoader = !1),
+#"/header-search/api/start-product-name-search" == = e.config.url & & (t.productGroupSearchLoader = !1),
+#"/header-search/api/start-tecdoc-search" == = e.config.url & & (t.tecDocSearchLoader = !1),
+#e.config.url.indexOf("/productgroupsearchesajax/search_in_all_groups") > -1 & & (t.mainPageProductGroupSearchLoader
+#url = "https://zsu.hu/productgroupsearchesajax/search_in_all_groups"
+
+#url = "https://zsu.hu/header-search/api/start-product-name-search"
+#payload = {"searchString": "92159403"}
+#p1= json.dumps(payload)
+#p1= payload
+#print(p1)
 #url = "https://zsu.hu/header-search/api/getHeaderSearches"
-#payload = {"searchString": "302540"}
+#url =  "https://zsu.hu/header-search/api/start-product-number-search"
+
+#paylourl = ad = {"searchString": "302540"}
+
+#url ="https://zsu.hu/cikkszamkereso?s=92159403"
+#url ="https://zsu.hu/cikkszamkereso"
+#payload = {"s": "92159403"}
+#p1= json.dumps(payload)
+#p1= payload
+
+#response = requests.get(url, data=p1, timeout=5)
+#response = requests.get(url)
 
 
-
-response = requests.post(url, params=p1)
-#response = requests.post(url)
-
-
-print("Státusz kód:", response.status_code)
-print("Válasz:", response.text)
-system.exit()
+#print("Státusz kód:", response.status_code)
+#print("Válasz:", response.text)
+#sys.exit()
 
 # fájlnevek
 INPUT_FILE = "URL_LIST.csv"
@@ -49,49 +64,10 @@ for url in url_list:
         print(f"Feldolgozás alatt: {url}")
 
 
-        #def myfunc(a):
-        #    return len(a)
-        #x = map(myfunc, ('apple', 'banana', 'cherry'))
-        #print(x)
-        #print(type(x))
-        # convert the map into a list, for readability:
-        #print(list(x))
 
         resp = requests.get(url, timeout=5)
-        #print(type(resp))
-        #print(type(resp.text))
-        #print(type(resp))
-        #print(dir(resp))
         dt= (time.time() - timestamp)
         print(i , len(url_list) , round(dt)//60,  resp.elapsed)
-        #print(resp.headers)
-
-        #print(dir(resp.cookies))
-
-        #print(map(resp))
-        #print("resp.cookies.get_dict")
-        #print(resp.cookies.get_dict)
-        #print(resp.cookies.items)
-        #print(resp.cookies.values)
-
-        #print(resp.is_redirect)
-
-        #print(resp._content)
-        #print(resp.json)
-        #print(resp.links)
-
-        #print(resp.next)
-
-        #print(resp.__sizeof__())
-        #print(resp.__static_attributes__)
-        #print(resp.__str__)
-        #print(resp.headers['Content-Length'])
-
-        #product_search = str(resp.text[1000:2000])
-        #print(product_search)
-        #print(type(product_search))
-        #print(resp.text[154416:3000])
-
         start_index0 = resp.text.find("productnumbers=")
         start_index1 = resp.text.find("filtersconfig=")
         #start_index = resp.text.find("headerContent")
